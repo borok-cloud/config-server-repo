@@ -1,0 +1,13 @@
+flowchart TD
+    Client -->|POST /graphql with auth| API_Gateway
+    API_Gateway -->|Validate token| Auth_Service
+    Auth_Service -->|Auth response| API_Gateway
+    API_Gateway -->|Parse GraphQL query| Query_Parser
+    Query_Parser -->|Check permissions| Authorization
+    Authorization -->|Permission result| Query_Parser
+    Query_Parser -->|Route to correct adapter| Database_Router
+    Database_Router -->|Convert to DB query| Database_Adapter
+    Database_Adapter -->|Execute query| Target_Database
+    Target_Database -->|Return results| Database_Adapter
+    Database_Adapter -->|Format as GraphQL| Response_Formatter
+    Response_Formatter -->|Return JSON response| Client
