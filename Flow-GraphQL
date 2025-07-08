@@ -1,3 +1,15 @@
+flowchart LR
+    Client --> API_Gateway
+    API_Gateway --> Authentication
+    Authentication --> Authorization
+    Authorization --> Query_Parser
+    Query_Parser --> Database_Router
+    Database_Router --> Database_Adapter
+    Database_Adapter --> Target_Database
+    Target_Database --> Response_Formatter
+    Response_Formatter --> Client
+
+
 flowchart TD
     Client -->|POST /graphql with auth| API_Gateway
     API_Gateway -->|Validate token| Auth_Service
